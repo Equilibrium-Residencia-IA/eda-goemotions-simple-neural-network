@@ -9,18 +9,28 @@ cerca de 54 mil comentários do Reddit traduzidos, com 28 rótulos de emoção.
 
 ## Conteúdo do repositório
 
+```
+.
+├── notebooks/
+│   ├── eda_goemotions_ptbr.ipynb
+│   └── rede_neural_tfidf_ekman.ipynb
+├── requirements.txt
+├── .gitignore
+└── README.md
+```
+
 | Arquivo | O que faz |
 |---|---|
-| `eda_goemotions_ptbr.ipynb` | Baixa o dataset, trata os textos, une train/dev/test em um dataset só, faz a análise exploratória e gera os arquivos de treino |
-| `rede_neural_tfidf_ekman.ipynb` | Extrai as features TF-IDF, treina a rede neural, ajusta os limiares, avalia no teste e compara com uma regressão logística |
+| `notebooks/eda_goemotions_ptbr.ipynb` | Baixa o dataset, trata os textos, une train/dev/test em um dataset só, faz a análise exploratória e gera os arquivos de treino |
+| `notebooks/rede_neural_tfidf_ekman.ipynb` | Extrai as features TF-IDF, treina a rede neural, ajusta os limiares, avalia no teste e compara com uma regressão logística |
 | `requirements.txt` | Pacotes Python necessários |
 
 Os notebooks devem ser executados **nessa ordem**: o primeiro gera os CSVs que o segundo usa.
 
 ```
-eda_goemotions_ptbr.ipynb ──► data_processed/train.csv
-                              data_processed/validation.csv  ──► rede_neural_tfidf_ekman.ipynb
-                              data_processed/test.csv
+eda_goemotions_ptbr.ipynb ──► notebooks/data_processed/train.csv
+                              notebooks/data_processed/validation.csv  ──► rede_neural_tfidf_ekman.ipynb
+                              notebooks/data_processed/test.csv
 ```
 
 ## Como rodar
@@ -42,10 +52,15 @@ jupyter notebook
 
 No Jupyter:
 
-1. Abra `eda_goemotions_ptbr.ipynb` e execute tudo (*Run → Run All Cells*). Ele clona o repositório do dataset
-   em `emotional-dataset-pt-br/` e salva os resultados em `data_processed/`. Leva cerca de 2 minutos.
-2. Abra `rede_neural_tfidf_ekman.ipynb` e execute tudo. Ele lê os CSVs de `data_processed/` e treina a rede.
-   Leva menos de 2 minutos em CPU.
+1. Abra `notebooks/eda_goemotions_ptbr.ipynb` e execute tudo (*Run → Run All Cells*). Ele clona o repositório do
+   dataset em `notebooks/emotional-dataset-pt-br/` e salva os resultados em `notebooks/data_processed/`. Leva cerca
+   de 2 minutos.
+2. Abra `notebooks/rede_neural_tfidf_ekman.ipynb` e execute tudo. Ele lê os CSVs de `notebooks/data_processed/` e
+   treina a rede. Leva menos de 2 minutos em CPU.
+
+Os caminhos são relativos à pasta do notebook, então os dois precisam ficar juntos em `notebooks/`. Abra o Jupyter
+pela raiz do repositório e navegue até a pasta. Se rodar pelo VS Code, confira se o diretório de trabalho é a pasta
+do notebook (é o padrão).
 
 ### Opção 2: no Google Colab
 
@@ -89,5 +104,5 @@ exatamente.
   palavrões pesados ou ofensas. O dataset em si não é alterado, e esse tipo de conteúdo continua nos dados de treino.
 - Os rótulos têm ruído herdado do GoEmotions original, e o conteúdo vem de discussões do Reddit em inglês traduzidas,
   com muitos temas dos EUA.
-- As pastas `emotional-dataset-pt-br/` e `data_processed/` são geradas pelos notebooks e ficam fora do repositório
+- As pastas `notebooks/emotional-dataset-pt-br/` e `notebooks/data_processed/` são geradas pelos notebooks e ficam fora do repositório
   (veja o `.gitignore`).
